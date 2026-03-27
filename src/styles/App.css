@@ -1,0 +1,27 @@
+body {
+  margin: auto;
+  width: fit-content;
+  /* max-width: 50vw; */
+}
+
+div#root > div:first-child {
+  font-size: 7rem;
+  font-family: "Jacques Francois Shadow", serif;
+  font-weight: 400;
+  font-style: normal; 
+  text-align: center;
+}
+
+div#root > div:nth-child(2) {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-style: normal; 
+  color: rgb(87, 87, 87);
+}
+
+div#root div.form-wrapper {
+  margin: auto;
+  border: solid 0.15rem rgb(224, 224, 224);
+  border-radius: 3px;
+}

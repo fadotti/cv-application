@@ -1,0 +1,49 @@
+div.section {
+  margin: 30px 10px;
+  padding: 5px;
+  background-color: rgb(240, 240, 240);
+  font-family: "IBM Plex Sans", sans-serif;
+  border-radius: 3px;
+
+  &:hover {
+    background-color: pink;
+  }
+}
+
+div.section > div:first-child {
+  font-weight: 700;
+  font-family: "Oleo Script", system-ui;
+  position: relative;
+  top: -35px;
+  left: 7px;
+  font-size: 2.5rem;
+}
+
+div.section > div:not(:first-child) {
+  margin: auto;
+  width: fit-content;
+  font-size: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px 100px;
+}
+
+div.section.single-column > div:not(:first-child) {
+  margin: auto;
+  width: fit-content;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+textarea {
+  width: 100%;
+  height: 7rem;
+}
+
+input {
+  height: 1.2rem;
+  width: 30ch;
+  font-size: 1rem;
+}
