@@ -25,3 +25,22 @@ div#root div.form-wrapper {
   border: solid 0.15rem rgb(224, 224, 224);
   border-radius: 3px;
 }
+
+
+
+
+
+
+dialog > div {
+  width: 1000px;
+}
+
+dialog div.section-header {
+  font-size: 2rem;
+  text-align: center;
+}
+
+dialog div.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}

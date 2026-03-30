@@ -28,6 +28,11 @@ div.section > div:not(:first-child) {
   gap: 30px 100px;
 }
 
+label.span-2 {
+  text-align: center;
+  grid-column: span 2;
+}
+
 div.section.single-column > div:not(:first-child) {
   margin: auto;
   width: fit-content;
@@ -46,4 +51,9 @@ input {
   height: 1.2rem;
   width: 30ch;
   font-size: 1rem;
+}
+
+div.experience button:not(:last-child) {
+  display: block;
+  margin-left: auto;
 }
