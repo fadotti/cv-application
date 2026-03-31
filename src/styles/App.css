@@ -20,6 +20,10 @@ div#root > div:nth-child(2) {
   color: rgb(87, 87, 87);
 }
 
+div#root form.hidden {
+  display: none;
+}
+
 div#root div.form-wrapper {
   margin: auto;
   border: solid 0.15rem rgb(224, 224, 224);
@@ -31,8 +35,17 @@ div#root div.form-wrapper {
 
 
 
+
+dialog {
+  margin-top: 0;
+  border-radius: 15px;
+}
+
 dialog > div {
-  width: 1000px;
+  width: 93vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 dialog div.section-header {
@@ -43,4 +56,12 @@ dialog div.section-header {
 dialog div.grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+}
+
+dialog > div span {
+  text-align: center;
+}
+
+dialog > div *.span-2 {
+  grid-column: span 2;
 }

@@ -11,6 +11,82 @@ let nextId = 1;
 
 function App() {
 
+  const [hideForm, setHideForm] = useState(false);
+
+  const [contactDetails, setContactDetails] = useState({
+    firstName: 'Federico',
+    lastName: 'Dotti',
+    email: 'ee',
+    phoneNumber: '999'
+  })
+
+  const handleContactUpdates = {
+    firstName: function(e) {
+      setContactDetails({
+        ...contactDetails,
+        firstName: e.target.value
+      })
+    },
+    lastName: function(e) {
+      setContactDetails({
+        ...contactDetails,
+        lastName: e.target.value
+      })
+    },
+    email: function(e) {
+      setContactDetails({
+        ...contactDetails,
+        email: e.target.value
+      })
+    },
+    phoneNumber: function(e) {
+      setContactDetails({
+        ...contactDetails,
+        phoneNumber: e.target.value
+      })
+    }
+  }
+
+  const [summary, setSummary] = useState('');
+
+  function handleSummaryChange(e) {
+    setSummary(e.target.value);
+  }
+
+  const [education, setEducation] = useState({
+    university: 'N/A',
+    discipline: '',
+    degreeLevel: '',
+    graduationDate: ''
+  })
+
+  const handleEducationUpdates = {
+    university: function(e) {
+      setEducation({
+        ...education,
+        university: e.target.value
+      })
+    },
+    discipline: function(e) {
+      setEducation({
+        ...education,
+        discipline: e.target.value
+      })
+    },
+    degreeLevel: function(e) {
+      setEducation({
+        ...education,
+        degreeLevel: e.target.value
+      })
+    },
+    graduationDate: function(e) {
+      setEducation({
+        ...education,
+        graduationDate: e.target.value
+      })
+    }
+  }
+
   const [experienceArray, setExperienceArray] = useState([
     {
       id: 0,
@@ -26,10 +102,10 @@ function App() {
     <React.Fragment key={job.id}>
       {index > 0 && <hr />}
       <div className='grid'>
-        <span>Company Name: {job.companyName}</span>
-        <span>Job Title: {job.jobTitle}</span>
-        <span>Start Date: {job.startDate}</span>
-        <span>End Date: {job.endDate}</span>
+        <span><b>Company Name:</b> {job.companyName}</span>
+        <span><b>Job Title:</b> {job.jobTitle}</span>
+        <span><b>Start Date:</b> {job.startDate}</span>
+        <span><b>End Date:</b> {job.endDate}</span>
       </div>
     </React.Fragment>
   )
@@ -120,11 +196,20 @@ function App() {
     <>
       <div>CV Generator</div>
       <div>Required fields are marked with an '*'</div>
-      <form action="">
+      <form action="" className={hideForm ? 'hidden' : ''}>
         <div className="form-wrapper">
-          <GeneralInfo/>
-          <Summary/>
-          <Education/>
+          <GeneralInfo
+            contactDetails={contactDetails}
+            handleContactUpdates={handleContactUpdates}
+          />
+          <Summary
+            summary={summary}
+            handleSummaryChange={handleSummaryChange}
+          />
+          <Education
+            education={education}
+            handleEducationUpdates={handleEducationUpdates}
+          />
           <Experience
             experienceArray={experienceArray}
             handleCompanyNameChange={handleCompanyNameChange}
@@ -137,9 +222,13 @@ function App() {
           />
           <button onClick={(e) => {
             e.preventDefault();
+            setHideForm(true);
             dialogRef.current.showModal();
-            // window.print();
-            // dialogRef.current.close();
+            setTimeout(() => {
+              window.print();
+              setHideForm(false);
+              dialogRef.current.close();
+            }, 1)
           }}>
             Print CV
           </button>
@@ -147,6 +236,21 @@ function App() {
       </form>
       <dialog ref={dialogRef}>
         <div>
+          <div className="section-header">{contactDetails.firstName} {contactDetails.lastName} | CV</div>
+          <div className="grid">
+            <span className="span-2"><b>Email:</b> {contactDetails.email} | <b>Phone number:</b> {contactDetails.phoneNumber}</span>
+          </div>
+          <div className="section-header">Summary</div>
+          <div className="grid">
+            <span className="span-2">{summary}</span>
+          </div>
+          <div className="section-header">Education</div>
+          <div className="grid">
+            <span><b>{education.university}</b></span>
+            <span><b>Graduation date:</b></span>
+            <span>{education.degreeLevel} {(education.discipline != '') && 'in ' + education.discipline}</span>
+            <span>{education.graduationDate}</span>
+          </div>
           <div className="section-header">Experience</div>
           {experienceList}
         </div>

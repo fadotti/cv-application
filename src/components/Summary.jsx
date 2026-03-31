@@ -1,14 +1,20 @@
 import "../styles/section.css"
 
-function Summary() {
+function Summary({summary, handleSummaryChange}) {
 
 
   return (
-    <div className="section single-column">
+    <div className="section"> 
       <div>Brief Summary</div>
       <div>
-        <label>A short overview of your professional history: <br />
-          <textarea name="summary" id="personal-summary"></textarea>
+        <label className="span-2">A short overview of your professional history: <br />
+          <textarea 
+            name="summary" 
+            id="personal-summary"
+            value={summary}
+            onChange={handleSummaryChange}
+          >
+          </textarea>
         </label>
       </div>
     </div>
@@ -16,3 +22,5 @@ function Summary() {
 }
 
 export default Summary
+
+//single-column

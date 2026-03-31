@@ -1,6 +1,9 @@
 import "../styles/section.css"
 
-function GeneralInfo() {
+function GeneralInfo({
+  contactDetails,
+  handleContactUpdates
+}) {
 
 
   return (
@@ -8,16 +11,32 @@ function GeneralInfo() {
       <div>Contact Details</div>
       <div>
         <label>* First name: <br />
-          <input type="text" />
+          <input 
+            type="text"
+            value={contactDetails.firstName}
+            onChange={handleContactUpdates.firstName} 
+          />
         </label>
         <label>* Last name: <br />
-          <input type="text" />
+          <input 
+            type="text"
+            value={contactDetails.lastName} 
+            onChange={handleContactUpdates.lastName}
+          />
         </label>
         <label>* Email: <br />
-          <input type="text" />
+          <input 
+            type="email" 
+            value={contactDetails.email}
+            onChange={handleContactUpdates.email}
+          />
         </label>
         <label>Phone number: <br />
-          <input type="text" />
+          <input 
+            type="tel" 
+            value={contactDetails.phoneNumber}
+            onChange={handleContactUpdates.phoneNumber}
+          />
         </label>
       </div>
     </div>
