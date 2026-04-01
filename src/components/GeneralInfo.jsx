@@ -14,7 +14,8 @@ function GeneralInfo({
           <input 
             type="text"
             value={contactDetails.firstName}
-            onChange={handleContactUpdates.firstName} 
+            onChange={handleContactUpdates.firstName}
+            pattern="^[\p{L}]{3,15}$" 
           />
         </label>
         <label>* Last name: <br />
@@ -22,6 +23,7 @@ function GeneralInfo({
             type="text"
             value={contactDetails.lastName} 
             onChange={handleContactUpdates.lastName}
+            pattern="^[\p{L}]{3,15}$"
           />
         </label>
         <label>* Email: <br />

@@ -10,13 +10,16 @@ function Experience({
   handleEndDateChange,
   handleJobDescriptionChange,
   handleAddExperienceClick,
-  handleRemoveJobClick
+  handleRemoveJobClick,
+  addJobIconURL,
+  removeJobIconURL
 }) {
   const experienceList = experienceArray.map((job, index) => 
     <React.Fragment key={job.id}>
       {index > 0 && <hr />} 
       <button className={`react-key-${job.id}`} onClick={handleRemoveJobClick}>
-        Remove job
+        <img src={removeJobIconURL} alt="" />
+        <span>Remove job</span>
       </button>
       <div>
         <label>Company name: <br />
@@ -69,7 +72,8 @@ function Experience({
       <div>Experience</div>
       {experienceList}
       <button onClick={handleAddExperienceClick}>
-        Add new job experience
+        <img src={addJobIconURL} alt="" />
+        <span>Add new job experience</span>
       </button>
     </div>
   )

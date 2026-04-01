@@ -4,6 +4,7 @@ div.section {
   background-color: rgb(240, 240, 240);
   font-family: "IBM Plex Sans", sans-serif;
   border-radius: 3px;
+  transition: 200ms background-color ease-in;
 
   &:hover {
     background-color: pink;
@@ -45,6 +46,32 @@ input {
 }
 
 div.experience button:not(:last-child) {
-  display: block;
   margin-left: auto;
+}
+
+button {
+  border-radius: 5px;
+  background-color: aliceblue;
+  font-weight: 700;
+  transition: 200ms background-color ease-in;
+
+  &:hover {
+    background-color: rgb(240, 240, 240);
+  }
+}
+
+@media (max-width: 700px) {
+  div.section > div:not(:first-child) {
+    margin: auto;
+    width: fit-content;
+    font-size: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px 100px;
+  }
+
+  label.span-2 {
+    text-align: center;
+    grid-column: span 1;
+  }
 }

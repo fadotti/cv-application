@@ -30,7 +30,29 @@ div#root div.form-wrapper {
   border-radius: 3px;
 }
 
+div.form-wrapper > button {
+  display: flex;
+  margin: auto;
+}
 
+button {
+  display: flex;
+  align-items: center;
+}
+
+button > img {
+  height: 1.5rem;
+}
+
+@media (max-width: 700px) {
+  div#root > div:first-child {
+    font-size: 3.5rem;
+  }
+
+  div#root > div:nth-child(2) {
+    font-size: 0.6rem;
+  }
+}
 
 
 
@@ -64,4 +86,12 @@ dialog > div span {
 
 dialog > div *.span-2 {
   grid-column: span 2;
+}
+
+dialog span {
+  white-space: pre-wrap;
+}
+
+dialog span.justify-left {
+  text-align: left;
 }

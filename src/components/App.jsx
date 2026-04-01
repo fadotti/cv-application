@@ -6,6 +6,9 @@ import "./GeneralInfo.jsx"
 import GeneralInfo from "./GeneralInfo.jsx"
 import Summary from "./Summary.jsx"
 import React from 'react'
+import deleteOutline from "../assets/delete-outline.svg"
+import plusIcon from "../assets/plus.svg"
+import printerOutline from "../assets/printer-outline.svg"
 
 let nextId = 1;
 
@@ -14,10 +17,10 @@ function App() {
   const [hideForm, setHideForm] = useState(false);
 
   const [contactDetails, setContactDetails] = useState({
-    firstName: 'Federico',
-    lastName: 'Dotti',
-    email: 'ee',
-    phoneNumber: '999'
+    firstName: 'Arsène',
+    lastName: 'Lupin',
+    email: 'alupin@gmail.com',
+    phoneNumber: '33999881799'
   })
 
   const handleContactUpdates = {
@@ -26,17 +29,31 @@ function App() {
         ...contactDetails,
         firstName: e.target.value
       })
+      setIsFormValid({
+        ...isFormValid, 
+        firstName: e.target.checkValidity()
+      })
     },
     lastName: function(e) {
+      console.log(e.target.checkValidity())
       setContactDetails({
         ...contactDetails,
         lastName: e.target.value
       })
+      setIsFormValid({
+        ...isFormValid, 
+        lastName: e.target.checkValidity()
+      })
+      console.log(isFormValid);
     },
     email: function(e) {
       setContactDetails({
         ...contactDetails,
         email: e.target.value
+      })
+      setIsFormValid({
+        ...isFormValid, 
+        email: e.target.checkValidity()
       })
     },
     phoneNumber: function(e) {
@@ -47,17 +64,17 @@ function App() {
     }
   }
 
-  const [summary, setSummary] = useState('');
+  const [summary, setSummary] = useState('Private investigator with a long track record of apprehending villainous characters. Expert at uncovering valuable items hiding in plain sight.');
 
   function handleSummaryChange(e) {
     setSummary(e.target.value);
   }
 
   const [education, setEducation] = useState({
-    university: 'N/A',
-    discipline: '',
-    degreeLevel: '',
-    graduationDate: ''
+    university: 'Paris Police Academy',
+    discipline: 'Forensic Science',
+    degreeLevel: 'Doctorate',
+    graduationDate: '1902-04-08'
   })
 
   const handleEducationUpdates = {
@@ -90,11 +107,11 @@ function App() {
   const [experienceArray, setExperienceArray] = useState([
     {
       id: 0,
-      companyName: '',
-      jobTitle: '',
-      startDate: '',
+      companyName: 'Lupin Enterprises',
+      jobTitle: 'Gentleman Thief',
+      startDate: '1905-10-20',
       endDate: '',
-      jobDescription: ''
+      jobDescription: 'Main job duties are: \n\n -Taking walks along the Seine. \n -Keeping an eye out for unattended wealth. \n -Saving France from the war. \n -Having a pint with Herlock Sholmès.'
     }
   ])
 
@@ -106,18 +123,17 @@ function App() {
         <span><b>Job Title:</b> {job.jobTitle}</span>
         <span><b>Start Date:</b> {job.startDate}</span>
         <span><b>End Date:</b> {job.endDate}</span>
+        <span className="span-2 justify-left">{job.jobDescription}</span>
       </div>
     </React.Fragment>
   )
 
-  console.log(experienceList);
-
   function handleCompanyNameChange(e) {
-    console.log(e.target.className.split('-').at(-1));
+    // console.log(e.target.className.split('-').at(-1));
     const reactKey = Number(e.target.className.split('-').at(-1));
     const job = experienceArray.filter(job => job.id === reactKey);
     const remainingJobs = experienceArray.filter(job => job.id !== reactKey);
-    console.log(job[0], remainingJobs)
+    // console.log(job[0], remainingJobs)
     job[0].companyName = e.target.value;
     setExperienceArray([
       ...remainingJobs, job[0]
@@ -158,6 +174,7 @@ function App() {
     const reactKey = Number(e.target.className.split('-').at(-1));
     const job = experienceArray.filter(job => job.id === reactKey);
     const remainingJobs = experienceArray.filter(job => job.id !== reactKey);
+    // console.log(e.target.value);
     job[0].jobDescription = e.target.value;
     setExperienceArray([
       ...remainingJobs, job[0]
@@ -190,7 +207,13 @@ function App() {
   }
 
   const dialogRef = useRef(null);
+  const printRef = useRef(null);
 
+  const [isFormValid, setIsFormValid] = useState({
+    firstName: true,
+    lastName: true,
+    email: true
+  })
 
   return (
     <>
@@ -219,18 +242,39 @@ function App() {
             handleJobDescriptionChange={handleJobDescriptionChange}
             handleAddExperienceClick={handleAddExperienceClick}
             handleRemoveJobClick={handleRemoveJobClick}
+            addJobIconURL={plusIcon}
+            removeJobIconURL={deleteOutline}
           />
-          <button onClick={(e) => {
-            e.preventDefault();
-            setHideForm(true);
-            dialogRef.current.showModal();
-            setTimeout(() => {
-              window.print();
-              setHideForm(false);
-              dialogRef.current.close();
-            }, 1)
+          <button ref={printRef} onClick={(e) => {
+            if(isFormValid.firstName && isFormValid.lastName && isFormValid.email) {
+              e.preventDefault();
+              printRef.current.setCustomValidity('');
+              setHideForm(true);
+              dialogRef.current.showModal();
+              setTimeout(() => {
+                window.print();
+                setHideForm(false);
+                dialogRef.current.close();
+              }, 1)
+            } else {
+              e.preventDefault();
+              let validationMessage = '';
+              if(!isFormValid.firstName) {
+                validationMessage += 'First names must be between 3 and 15 characters long and contain only letters. ';
+              }
+              if(!isFormValid.lastName) {
+                validationMessage += '\nLast names must be between 3 and 15 characters long and contain only letters. ';
+              }
+              if(!isFormValid.email) {
+                validationMessage += '\nEmails must follow the standard email format, i.e. alupin@gmail.com ';
+              }
+              printRef.current.setCustomValidity(validationMessage);
+              printRef.current.reportValidity();
+              console.log(validationMessage);
+            }
           }}>
-            Print CV
+            <img src={printerOutline} alt="" />
+            <span>Print CV</span>
           </button>
         </div>
       </form>
@@ -242,7 +286,7 @@ function App() {
           </div>
           <div className="section-header">Summary</div>
           <div className="grid">
-            <span className="span-2">{summary}</span>
+            <span className="span-2 justify-left">{summary}</span>
           </div>
           <div className="section-header">Education</div>
           <div className="grid">
