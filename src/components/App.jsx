@@ -255,7 +255,7 @@ function App() {
                 window.print();
                 setHideForm(false);
                 dialogRef.current.close();
-              }, 1)
+              }, 30)
             } else {
               e.preventDefault();
               let validationMessage = '';
