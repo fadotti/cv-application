@@ -123,7 +123,7 @@ function App() {
         <span><b>Job Title:</b> {job.jobTitle}</span>
         <span><b>Start Date:</b> {job.startDate}</span>
         <span><b>End Date:</b> {job.endDate}</span>
-        <span className="span-2 justify-left">{job.jobDescription}</span>
+        <span className="span-2 justify-left dialog-job-description">{job.jobDescription}</span>
       </div>
     </React.Fragment>
   )

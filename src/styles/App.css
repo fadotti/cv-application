@@ -52,6 +52,10 @@ button > img {
   div#root > div:nth-child(2) {
     font-size: 0.6rem;
   }
+
+  div#root form.hidden {
+  display: none;
+}
 }
 
 
@@ -73,6 +77,12 @@ dialog > div {
 dialog div.section-header {
   font-size: 2rem;
   text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+div.grid {
+  row-gap: 10px;
 }
 
 dialog div.grid {
